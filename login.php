@@ -21,6 +21,13 @@
     <link href="./css/pages/signin.css" rel="stylesheet" type="text/css" />
 
     <link href="./css/custom.css" rel="stylesheet" />
+     <script>
+        var oFBParam = {
+            apiKey: "<?php echo APP_ID;?>", //APP ID
+            perms: "<?php echo PERMS;?>", //Permissions
+            OAuth: true //OAuth 2.0 사용 여부
+        };
+    </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
@@ -137,10 +144,11 @@
 <script src="./js/libs/jquery-1.8.3.min.js"></script>
 <script src="./js/libs/jquery-ui-1.10.0.custom.min.js"></script>
 <script src="./js/libs/bootstrap.min.js"></script>
-
+<script src="./js/facebook.js"></script>
 <script src="./js/Application.js"></script>
 
 <script src="./js/signin.js"></script>
+
 
 </body>
 </html>
