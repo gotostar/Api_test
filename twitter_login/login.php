@@ -21,6 +21,7 @@ else // Not logged in
 		$token = $request_token['oauth_token'];
 		$_SESSION['request_token'] = $token ;
 		$_SESSION['request_token_secret'] = $request_token['oauth_token_secret'];
+		$_SESSION['login_type'] = 'twitter';
 		
 		switch ($connection->http_code) 
 		{

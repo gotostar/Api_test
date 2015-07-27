@@ -34,6 +34,13 @@ if($_SESSION['name'] == ""){
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script>
+    var oFBParam = {
+        apiKey: "<?php echo APP_ID;?>", //APP ID
+        perms: "<?php echo PERMS;?>", //Permissions
+        OAuth: true //OAuth 2.0 사용 여부
+    };
+    </script>
 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
@@ -84,7 +91,11 @@ if($_SESSION['name'] == ""){
 							<li><a href="javascript:;">My Profile</a></li>
 							<li><a href="javascript:;">My Groups</a></li>
 							<li class="divider"></li>
-							<li><a href="javascript:oFB.fbLogout();;">Logout</a></li>
+							<?php if($_SESSION['login_type'] == 'twitter'){ ?>
+								<li><a href="logout.php">Logout</a></li>
+							<?php } else if ($_SESSION['login_type'] == 'facebook'){ ?>
+								<li><a href="javascript:oFB.fbLogout();">Logout</a></li>
+							<?php } ?>
 						</ul>
 						
 					</li>

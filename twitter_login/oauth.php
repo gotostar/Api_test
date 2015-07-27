@@ -2,6 +2,7 @@
 session_start();
 require_once('twitteroauth/twitteroauth.php');
 include('config.php');
+include_once('../lib/init.inc');
 
 
 if(isset($_GET['oauth_token']))
@@ -22,10 +23,21 @@ if(isset($_GET['oauth_token']))
 				$_SESSION['name']=$content->name;
 				$_SESSION['image']=$content->profile_image_url;
 				$_SESSION['twitter_id']=$content->screen_name;
-				
-				//redirect to main page.
-				header('Location: http://gotostar.cafe24.com/Api_test/index.php'); 
 
+				$selectQ = "SELECT user_uid FROM tw_user_list WHERE user_uid = '".$content->screen_name."'";
+				$userCheck = execSqlOneCol($selectQ);
+
+				if(empty($userCheck)){
+					$query = "insert into tw_user_list value ('','".$content->screen_name."','".$content->name."')";
+					$result = execSqlUpdate($query);
+				    if($result){
+				        header('Location: http://gotostar.cafe24.com/Api_test/index.php'); 
+				    }
+				} else {
+					header('Location: http://gotostar.cafe24.com/Api_test/index.php'); 
+				}
+				//redirect to main page.
+				
 			}
 			else
 			{

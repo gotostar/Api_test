@@ -29,7 +29,6 @@
             OAuth: true //OAuth 2.0 사용 여부
         };
     </script>
-    <script></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
@@ -117,7 +116,7 @@
 				<p>Sign in using social network:</p>
 				
 				<div class="twitter">
-					<a href="twiiter_login/login.php" class="btn_1">Login with Twitter</a>				
+					<a href="twitter_login/login.php" class="btn_1">Login with Twitter</a>				
 				</div>
 				
 				<div class="fb">

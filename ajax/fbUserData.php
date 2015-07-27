@@ -12,6 +12,7 @@ switch ($_REQUEST['type']) {
 	
 	$_SESSION['name'] = $userName;
 	$_SESSION['uid'] = $userUid;
+	$_SESSION['login_type'] = 'facebook';
 
 	if(empty($userCheck)){
 		$query = "insert into fb_user_list value ('','".$userUid."','".$userName."')";
