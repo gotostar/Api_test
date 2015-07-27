@@ -1,3 +1,4 @@
+<?php include_once "lib/init.inc";?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,13 +22,14 @@
     <link href="./css/pages/signin.css" rel="stylesheet" type="text/css" />
 
     <link href="./css/custom.css" rel="stylesheet" />
-     <script>
+    <script>
         var oFBParam = {
             apiKey: "<?php echo APP_ID;?>", //APP ID
             perms: "<?php echo PERMS;?>", //Permissions
             OAuth: true //OAuth 2.0 사용 여부
         };
     </script>
+    <script></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
@@ -43,7 +45,7 @@
 				<i class="icon-cog"></i>
 			</a>
 			
-			<a class="brand" href="./index.html">
+			<a class="brand" href="./index.php">
 				Base Admin <sup>2.0</sup>				
 			</a>		
 			
@@ -51,7 +53,7 @@
 				<ul class="nav pull-right">
 					
 					<li class="">						
-						<a href="./signup.html" class="">
+						<a href="./signup.php" class="">
 							Create an Account
 						</a>
 						
@@ -80,7 +82,7 @@
 	
 	<div class="content clearfix">
 		
-		<form action="./index.html" method="post" />
+		<form action="./index.php" method="post" />
 		
 			<h1>Sign In</h1>		
 			
@@ -115,11 +117,11 @@
 				<p>Sign in using social network:</p>
 				
 				<div class="twitter">
-					<a href="#" class="btn_1">Login with Twitter</a>				
+					<a href="twiiter_login/login.php" class="btn_1">Login with Twitter</a>				
 				</div>
 				
 				<div class="fb">
-					<a href="#" class="btn_2">Login with Facebook</a>				
+					<a href="javascript:oFB.fbLogin();" class="btn_2">Login with Facebook</a>				
 				</div>
 			</div>
 			
@@ -132,7 +134,7 @@
 
 <!-- Text Under Box -->
 <div class="login-extra">
-	Don't have an account? <a href="./signup.html">Sign Up</a><br />
+	Don't have an account? <a href="./signup.php">Sign Up</a><br />
 	Remind <a href="#">Password</a>
 </div> <!-- /login-extra -->
 
@@ -144,11 +146,9 @@
 <script src="./js/libs/jquery-1.8.3.min.js"></script>
 <script src="./js/libs/jquery-ui-1.10.0.custom.min.js"></script>
 <script src="./js/libs/bootstrap.min.js"></script>
-<script src="./js/facebook.js"></script>
 <script src="./js/Application.js"></script>
 
-<script src="./js/signin.js"></script>
-
+<script src="./js/facebook.js"></script>
 
 </body>
 </html>

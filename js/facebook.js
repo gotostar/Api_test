@@ -5,27 +5,15 @@ var oFB = (function(param){
                 appId: param.apiKey // App ID
                 ,OAuth: param.OAuth // enable OAuth 2.0
                 ,xfbml: true
-                ,version: 'v2.1'
+                ,version: 'v2.4'
             });
             _getStatus(function(res){
-
                 switch (res.status) {
                     case "unknown":
                     case "notConnected":
                     case "not_authorized":
-                        //oFB.fbLogin(thisPage);
                         break;
                     case "connected":
-                        if(thisPage == 'voc_message') {
-                            DirectMessageAPI(res);
-                        } else if(thisPage == 'voc_comments') {
-                            comments(res);
-                        } else if(thisPage == 'voc_others'){
-                            postByOthersAPI(res);
-                        } else if(thisPage == 'voc_database'){
-                        	voc_database();
-                        }
-
                         break;
                 }
             });
@@ -67,70 +55,17 @@ var oFB = (function(param){
             type: "POST",
             url: "ajax/fbUserData.php",
             data:{
-                userINFO: res
+                userINFO: res,
+                type : 'insert'
             },
             success: function (resultText) {
                 var resultData = $.parseJSON(resultText); //json 변환
-
-                setUserJoinCheck(res);
-            }
-        });
-    }
-    //UserJoinCheck
-    function setUserJoinCheck(res) {
-
-        $.ajax({
-            type: "POST",
-            url: "ajax/joinUserData.php",
-            data:{
-                userID: res.id,
-                userName: res.name,
-                type: 'check'
-            },
-            success: function (resultText) {
-                var resultData = $.parseJSON(resultText); //json 변환
-
-                if(resultData.status == 200) {
-
-                        $("#Dim").show();
-                        $("#userUid").val(res.id);
-                        $("#userProfile").attr("src","https://graph.facebook.com/v2.3/"+res.id+"/picture");
-                        $("#userName").text(res.name);
-
-                        $("#applyForm").show();
-
-                }else {
-                    if(resultData.data[0].role == 'Master') {
-                        location.href='admin_account.php';
-                    }else {
-                        location.href='tracking_facebook.php';
-                    }
-
+                console.log(resultData);
+                if(resultData.data){
+                    location.href="index.php";
                 }
             }
         });
-    }
-    function SendDM(message_id, message, access_token){
-
-        if(message_id != '' && message != '') {
-
-            FB.api(
-                "/"+message_id+"/messages",
-                "POST",
-                {
-                    "message": message,
-                    "access_token": access_token
-                },
-                function (response) {
-                    if (response && !response.error) {
-                        return true;
-                    }
-                }
-            );
-        }else {
-            alert('관리자 권한이 없습니다!');
-            return 0;
-        }
     }
     return {
         //페이스북 로그인
@@ -152,23 +87,8 @@ var oFB = (function(param){
         fbLogout : function(){
         	FB.logout(function(response) {
             	//alert("로그아웃 되었습니다.");
-            	top.location.href="index.php";
+            	top.location.href="logout.php";
             });
-        },
-        GetAccount : function(message_id, message) {
-            FB.api(
-                "/me/accounts",
-                function(response) {
-                    $.each(response.data, function (key, value) {
-                        if(value.id == "254787104685218") {
-                            var access_token = '';
-                            access_token = value.access_token;
-                            var resultDM = SendDM(message_id, message, access_token);
-                            return resultDM;
-                        }
-                    });
-                }
-            );
         }
     };
 })(oFBParam);
